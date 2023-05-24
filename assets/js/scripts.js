@@ -33,6 +33,7 @@ const saveTodo = (text) =>{
     todoList.appendChild(todo)
 
     todoInput.value = '';
+    todoInput.focus(); /*Serve para focar no input*/
 }
 
 // Eventos
@@ -43,5 +44,19 @@ todoForm.addEventListener('submit', (e) => {
 
     if (inputValue) {
         saveTodo(inputValue); /*Chamando a função saveTodo passando como parâmetro a variável inputValue*/
+    }
+})
+
+document.addEventListener('click', (e) => {
+
+    const targetEl = e.target /*Identificando onde foi o click e armazenando na variável targetEl*/
+    const parentEl = targetEl.closest('div') /*Identificando quem é a div pai mais próxima do targetEl e armazenando no parentEl*/
+
+    if(targetEl.classList.contains('finish-todo')){ /*Verificando se o targetEl tem a classe finish-todo*/
+        parentEl.classList.toggle('done') /*Adicionando e removendo a classe done através do click*/
+    }
+
+    if (targetEl.classList.contains('remove-todo')) {
+        parentEl.remove();
     }
 })
